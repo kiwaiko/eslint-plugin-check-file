@@ -1,0 +1,30 @@
+name: Migrate CommonJS to ESM
+
+on: workflow_dispatch
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  cjs2esm:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run GPT Prompt
+        uses: DukeLuo/gpt-runner@v1.0.0
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        with:
+          cmd: promptr -m gpt-3.5-turbo -p "You are a super javascript developer. Please help me migrate CommonJS to ESM for my javascript project. The target scope is all the js file located in folder lib/ and tests/. If a file's content exceeds the maximum limit, skip it. Please dont modify any logic except migrate CommonJS to ESM."
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: esm
+          author: Huan Luo <dukeluo@outlook.com>
+          title: 'refactor: migrate CommonJS to ESM'
+          commit-message: 'refactor: migrate CommonJS to ESM'

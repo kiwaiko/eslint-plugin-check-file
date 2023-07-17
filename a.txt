@@ -1,0 +1,20 @@
+{
+  "operations": [
+    {
+      "crudOperation": "read",
+      "filePath": "lib/file1.js"
+    },
+    {
+      "crudOperation": "read",
+      "filePath": "lib/file2.js"
+    },
+    {
+      "crudOperation": "read",
+      "filePath": "tests/test1.js"
+    },
+    {
+      "crudOperation": "read",
+      "filePath": "tests/test2.js"
+    }
+  ]
+}

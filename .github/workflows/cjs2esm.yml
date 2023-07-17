@@ -19,7 +19,7 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         with:
-          cmd: promptr -m gpt-3.5-turbo -p "You are a super javascript developer. Please help me migrate CommonJS to ESM for my javascript project. The target scope is all the js file located in folder lib/ and tests/. If a file's content exceeds the maximum limit, skip it. Please dont modify any logic except migrate CommonJS to ESM."
+          cmd: promptr -m gpt-3.5-turbo -p "You are a super javascript developer. Please help me migrate CommonJS to ESM for these files, and dont modify any other logic." $(git ls-tree -r --name-only HEAD | grep "lib/constants" | tr '\n' ' ')
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
